@@ -1,0 +1,10 @@
+{
+    "name" : "Anthrium Query Clutter Reducer",
+    "version" : "0.1",
+    "content_scripts" : [
+	{
+            "js" : [ "anthrium.user.js" ],
+	    "matches" : [ "*://*/*" ]
+        }
+    ]
+}

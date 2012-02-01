@@ -37,7 +37,6 @@ t.coとかリダイレクト系のURLに対応できない気がする
     * 移動せずに書き換えられるならすばらしい。
         * taberarelooとかに渡すときもそれが変わってて欲しい。
     * history.replaceStateでなんとかなる？
-        * replaceState(obj, title, location.pathname + leftover)でできそうかも。
 
 邪魔クエリ一例
 --------------
