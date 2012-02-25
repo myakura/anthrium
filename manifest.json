@@ -1,6 +1,6 @@
 {
     "name" : "Anthrium Query Clutter Reducer",
-    "version" : "0.1",
+    "version" : "0.2",
     "content_scripts" : [
 	{
             "js" : [ "anthrium.user.js" ],
