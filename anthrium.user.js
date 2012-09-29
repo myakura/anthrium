@@ -7,7 +7,7 @@
 
 (function () {
     var url = location.href,
-        re  = /[\?&](?:utm_source|ref|feature|fb_action_ids)=.*$/,
+        re  = /[\?&](?:utm_source|ref|feature|fb_action_ids|context|ob)=.*$/,
         nu  = '';
 
     if (!location.search) return;
