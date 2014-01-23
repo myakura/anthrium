@@ -12,7 +12,7 @@
 
     if (!location.search) return;
 
-    if (url.match(re)) {
+    if (re.test(url)) {
         nu = url.replace(re, '');
         history.replaceState(null, '', nu);
     }
