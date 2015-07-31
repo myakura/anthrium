@@ -1,11 +1,11 @@
 {
-    "name" : "Anthrium Query Clutter Reducer",
-    "version" : "0.3.1",
-    "manifest_version": 2,
-    "content_scripts" : [
+  "name": "Anthrium Query Clutter Reducer",
+  "version": "0.4.1",
+  "manifest_version": 2,
+  "content_scripts": [
     {
-        "js" : [ "anthrium.user.js" ],
-        "matches" : [ "*://*/*" ]
-        }
-    ]
+      "js": [ "anthrium.js" ],
+      "matches": [ "*://*/*" ]
+    }
+  ]
 }
