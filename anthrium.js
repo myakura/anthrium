@@ -30,7 +30,7 @@ const filterSearchParams = queryMap => {
 const rewriteURL = queryString => {
   if (!queryString) { return }
   let filteredQueries = filterSearchParams(getSearchParams(queryString))
-  let newQuery = !!filteredQueries.length ? `${filteredQueries.join('&')}` : ''
+  let newQuery = !!filteredQueries.length ? `?${filteredQueries.join('&')}` : ''
   let newURL = location.origin + location.pathname + newQuery + location.hash
   history.replaceState(null, '', newURL)
 }
