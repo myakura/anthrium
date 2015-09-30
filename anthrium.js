@@ -5,11 +5,15 @@ const annoyingQueryKeys = new Set([
   'utm_campaign',
   'utm_medium',
   'utm_content',
+  'utm_term',
   'ref',
   'feature',
   'fb_action_ids',
   'context',
   'ob',
+  'fromid',
+  'pk_campaign',
+  'pk_kwd',
 ])
 
 const getSearchParams = queryString => {
