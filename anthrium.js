@@ -6,6 +6,7 @@ const annoyingQueryKeys = new Set([
   'utm_medium',
   'utm_content',
   'utm_term',
+  'utm_int',
   'ref',
   'feature',
   'fb_action_ids',
