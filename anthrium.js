@@ -17,27 +17,18 @@ const annoyingQueryKeys = new Set([
   'pk_kwd',
 ])
 
-const getSearchParams = queryString => {
-  let queryArray = queryString.slice(1).split('&').map(query => query.split('='))
-  return new Map(queryArray)
-}
-
-const filterSearchParams = queryMap => {
-  let filteredQueries = []
-  queryMap.forEach((value, key) => {
-    if (!annoyingQueryKeys.has(key)) {
-      filteredQueries.push((value !== undefined) ? `${key}=${value}` : key)
+const rewriteURL = urlString => {
+  const url = new URL(urlString)
+  if (!url.search) { return }
+  const searchParams = url.searchParams
+  for (let key of searchParams.keys()) {
+    if (annoyingQueryKeys.has(key)) {
+      searchParams.delete(key)
     }
-  })
-  return filteredQueries
-}
-
-const rewriteURL = queryString => {
-  if (!queryString) { return }
-  let filteredQueries = filterSearchParams(getSearchParams(queryString))
-  let newQuery = !!filteredQueries.length ? `?${filteredQueries.join('&')}` : ''
-  let newPath = location.pathname + newQuery + location.hash
+  }
+  const newQuery = searchParams.toString() ? `?{searchParams.toString()}` : ''
+  const newPath = location.pathname + newQuery + location.hash
   history.replaceState(null, '', newPath)
 }
 
-rewriteURL(location.search)
+rewriteURL(location.href)
