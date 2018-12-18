@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const annoyingQueryKeys = new Set([
   'utm_source',
@@ -15,19 +15,21 @@ const annoyingQueryKeys = new Set([
   'fromid',
   'pk_campaign',
   'pk_kwd',
-])
+]);
 
 const rewriteURL = urlString => {
-  const url = new URL(urlString)
-  if (!url.search) { return }
-  const searchParams = url.searchParams
+  const url = new URL(urlString);
+  if (!url.search) {
+    return;
+  }
+  const searchParams = url.searchParams;
   for (let key of searchParams.keys()) {
     if (annoyingQueryKeys.has(key)) {
-      searchParams.delete(key)
+      searchParams.delete(key);
     }
   }
-  const newPath = location.pathname + url.search + location.hash
-  history.replaceState(null, '', newPath)
-}
+  const newPath = location.pathname + url.search + location.hash;
+  history.replaceState(null, '', newPath);
+};
 
-rewriteURL(location.href)
+rewriteURL(location.href);

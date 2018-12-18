@@ -1,11 +1,11 @@
 {
   "name": "Anthrium",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "manifest_version": 2,
   "content_scripts": [
     {
-      "matches": [ "*://*/*" ],
-      "js": [ "anthrium.js" ]
+      "matches": ["*://*/*"],
+      "js": ["anthrium.js"]
     }
   ]
 }
