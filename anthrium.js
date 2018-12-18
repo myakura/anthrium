@@ -26,8 +26,7 @@ const rewriteURL = urlString => {
       searchParams.delete(key)
     }
   }
-  const newQuery = searchParams.toString() ? `?${searchParams.toString()}` : ''
-  const newPath = location.pathname + newQuery + location.hash
+  const newPath = location.pathname + url.search + location.hash
   history.replaceState(null, '', newPath)
 }
 
