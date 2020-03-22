@@ -15,6 +15,7 @@ const annoyingQueryKeys = new Set([
   'fromid',
   'pk_campaign',
   'pk_kwd',
+  'CMP',
 ]);
 
 const rewriteURL = urlString => {
