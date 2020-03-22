@@ -18,18 +18,24 @@ const annoyingQueryKeys = new Set([
   'CMP',
 ]);
 
+const updateHash = hashString => {
+  return hashString.replace(/#Echobox=\d+/, '');
+};
+
 const rewriteURL = urlString => {
   const url = new URL(urlString);
-  if (!url.search) {
-    return;
-  }
-  const searchParams = url.searchParams;
-  for (let key of searchParams.keys()) {
-    if (annoyingQueryKeys.has(key)) {
-      searchParams.delete(key);
+  if (url.search) {
+    const searchParams = url.searchParams;
+    for (let key of searchParams.keys()) {
+      if (annoyingQueryKeys.has(key)) {
+        searchParams.delete(key);
+      }
     }
   }
-  const newPath = location.pathname + url.search + location.hash;
+  if (url.hash) {
+    url.hash = updateHash(url.hash);
+  }
+  const newPath = location.pathname + url.search + url.hash;
   history.replaceState(null, '', newPath);
 };
 
