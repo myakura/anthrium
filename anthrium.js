@@ -1,42 +1,47 @@
-'use strict';
+class AnthriumContent {
+  annoyingQueryKeys = new Set([
+    'utm_source',
+    'utm_campaign',
+    'utm_medium',
+    'utm_content',
+    'utm_term',
+    'utm_int',
+    'ref',
+    'feature',
+    'fb_action_ids',
+    'context',
+    'ob',
+    'fromid',
+    'pk_campaign',
+    'pk_kwd',
+    'CMP',
+  ]);
 
-const annoyingQueryKeys = new Set([
-  'utm_source',
-  'utm_campaign',
-  'utm_medium',
-  'utm_content',
-  'utm_term',
-  'utm_int',
-  'ref',
-  'feature',
-  'fb_action_ids',
-  'context',
-  'ob',
-  'fromid',
-  'pk_campaign',
-  'pk_kwd',
-  'CMP',
-]);
+  constructor() {
+    this.url = new URL(location.href);
+    this.updateURL();
+  }
 
-const updateHash = hashString => {
-  return hashString.replace(/#Echobox=\d+/, '');
-};
-
-const rewriteURL = urlString => {
-  const url = new URL(urlString);
-  if (url.search) {
-    const searchParams = url.searchParams;
-    for (let key of searchParams.keys()) {
-      if (annoyingQueryKeys.has(key)) {
-        searchParams.delete(key);
+  updateSearchParams() {
+    for (const key of this.url.searchParams.keys()) {
+      if (this.annoyingQueryKeys.has(key)) {
+        this.url.searchParams.delete(key);
       }
     }
   }
-  if (url.hash) {
-    url.hash = updateHash(url.hash);
-  }
-  const newPath = location.pathname + url.search + url.hash;
-  history.replaceState(null, '', newPath);
-};
 
-rewriteURL(location.href);
+  updateFragment() {
+    if (/#Echobox=\d+/.test(this.url.hash)) {
+      this.url.hash = this.url.hash.replace(/#Echobox=\d+/, '');
+    }
+  }
+
+  updateURL() {
+    this.updateSearchParams();
+    this.updateFragment();
+
+    history.replaceState(null, '', this.url.pathname);
+  }
+}
+
+new AnthriumContent();
